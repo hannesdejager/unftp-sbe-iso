@@ -1,0 +1,18 @@
+[package]
+name = "unftp-sbe-iso"
+version = "0.1.0"
+edition = "2024"
+description = "ISO file storage backend for libunftp"
+license = "Apache-2.0"
+authors = ["Hannes de Jager <hannes.de.jager@gmail.com>"]
+keywords = ["libunftp", "unftp", "ftp", "ftps", "iso"]
+categories = ["network-programming"]
+homepage = "https://github.com/hannesdejager/unftp-sbe-iso"
+repository = "https://github.com/hannesdejager/unftp-sbe-iso"
+readme = "README.md"
+
+[dependencies]
+libunftp = "0.20.3"
+async-trait = "0.1.83"
+cdfs = "0.2.3"
+tokio = "1.42.0"
