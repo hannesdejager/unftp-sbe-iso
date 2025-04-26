@@ -30,7 +30,7 @@ Add the `libunftp`, `unftp-sbe-iso` and `tokio` crates to your project's depende
 
 ```toml
 [dependencies]
-libunftp = "0.20.3"
+libunftp = "0.21.0"
 unftp-sbe-iso = "0.1"
 tokio = { version = "1", features = ["full"] }
 ```

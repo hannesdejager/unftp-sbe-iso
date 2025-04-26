@@ -1,6 +1,6 @@
 [package]
 name = "unftp-sbe-iso"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "ISO file storage backend for libunftp"
 license = "Apache-2.0"
@@ -12,7 +12,7 @@ repository = "https://github.com/hannesdejager/unftp-sbe-iso"
 readme = "README.md"
 
 [dependencies]
-libunftp = "0.20.3"
-async-trait = "0.1.83"
+libunftp = "0.21.0"
+async-trait = "0.1.88"
 cdfs = "0.2.3"
-tokio = "1.42.0"
+tokio = "1.44.2"
