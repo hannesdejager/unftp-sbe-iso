@@ -9,7 +9,7 @@ async fn main() {
 
     let server = ServerBuilder::new(Box::new(move || Storage::new("examples/my.iso")))
         .greeting("Welcome to my ISO over FTP")
-        .passive_ports(50000..65535)
+        .passive_ports(50000..=65535)
         .build()
         .unwrap();
 
