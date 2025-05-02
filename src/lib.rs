@@ -141,9 +141,13 @@ impl<User: UserDetail> StorageBackend<User> for Storage {
         path: P,
     ) -> Result<Self::Metadata> {
         let entry = self.find(path)?;
-        let header = entry.header();
+        let size = match &entry {
+            DirectoryEntry::Directory(d) => d.header().length as u64,
+            DirectoryEntry::File(f) => f.size() as u64,
+            DirectoryEntry::Symlink(l) => l.header().length as u64,
+        };
         Ok(IsoMeta {
-            len: (header.length * header.file_unit_size) as u64,
+            len: size,
             dir: matches!(entry, DirectoryEntry::Directory(_)),
             sym: matches!(entry, DirectoryEntry::Symlink(_)),
             group: entry.group().unwrap_or(0),
@@ -171,11 +175,15 @@ impl<User: UserDetail> StorageBackend<User> for Storage {
         };
         for entry in d.contents() {
             let e = entry.unwrap();
-            let h = e.header();
+            let size = match &e {
+                DirectoryEntry::Directory(d) => d.header().length as u64,
+                DirectoryEntry::File(f) => f.size() as u64,
+                DirectoryEntry::Symlink(l) => l.header().length as u64,
+            };
             entries.push(Fileinfo {
                 path: e.identifier().into(),
                 metadata: IsoMeta {
-                    len: (h.length * h.file_unit_size) as u64,
+                    len: size,
                     dir: matches!(e, DirectoryEntry::Directory(_)),
                     sym: matches!(e, DirectoryEntry::Symlink(_)),
                     group: e.group().unwrap_or(0),
