@@ -41,11 +41,6 @@
 
 use async_trait::async_trait;
 use cdfs::{DirectoryEntry, ExtraAttributes, ISO9660, ISODirectory, ISOFileReader};
-use libunftp::{
-    auth::UserDetail,
-    storage::{Error, ErrorKind},
-    storage::{Fileinfo, Metadata, Result, StorageBackend},
-};
 use std::{
     fmt::Debug,
     fs::File,
@@ -54,8 +49,12 @@ use std::{
     time::SystemTime,
 };
 use tokio::io::AsyncRead;
+use unftp_core::{
+    auth::UserDetail,
+    storage::{Error, ErrorKind, Fileinfo, Metadata, Result, StorageBackend},
+};
 
-/// A virtual file system that tells libunftp how to access ".iso" (ISO 9660) files.
+/// A virtual file system that tells the unftp server how to access ".iso" (ISO 9660) files.
 #[derive(Debug, Clone)]
 pub struct Storage {
     iso_path: PathBuf,
@@ -270,7 +269,7 @@ impl<User: UserDetail> StorageBackend<User> for Storage {
     }
 }
 
-/// Implements libunftp's Metadata trait
+/// Implements unftp-core's Metadata trait
 #[derive(Debug)]
 pub struct IsoMeta {
     /// The file size in bytes
